@@ -1,7 +1,12 @@
 package routes
 
-import "github.com/gin-gonic/gin"
+import (
+	Handler "App-Task/handler"
+
+	"github.com/gin-gonic/gin"
+)
 
 func UserRouter(router *gin.Engine) {
 
+	router.GET("/user/:userId", Handler.CreateUser())
 }

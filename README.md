@@ -26,25 +26,29 @@ Otherwise, run the following Go command to install the gin package:
 
 ### Project Directory Structure
 
-### 1 **`configsfb/`**
+### **`configsfb/`**
 
 Contains file connecting database
 
-### 1 **`handle/`**
+### **`handle/`**
 
 Contains are functions handles in app
 
-### 1. **`middleware/`**
+### **`middleware/`**
 
 This directory contains file middleware use in app
 
 ### **`model/`**
 
-Contains file query database
+Contains file is define struct data, logic database
 
 ### **`security/`**
 
 Contains the security of the app such as jwt,..
+
+### **`routers/`**
+
+Contains routers defines HTTP routes and handles requests and responses from the application's various endpoints.
 
 ### `main.go`
 

@@ -32,7 +32,7 @@ Contains file connecting database
 
 ### **`handle/`**
 
-Contains are functions handles in app
+Contains are functions, logics handles in app
 
 ### **`middleware/`**
 

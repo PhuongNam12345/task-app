@@ -2,6 +2,7 @@ package configsdb
 
 import (
 	"context"
+	"fmt"
 	"log"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -9,8 +10,6 @@ import (
 )
 
 func ConnectDB() *mongo.Client {
-
-	// Thiết lập thông tin kết nối MongoDB
 	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
@@ -20,9 +19,7 @@ func ConnectDB() *mongo.Client {
 	if err != nil {
 		log.Fatal(err)
 	}
-	// Lấy collection trong MongoDB
-
-	// collection_admin = client.Database("DB-test").Collection("admin")
+	fmt.Println("Connected to MongoDB")
 	return client
 
 }
@@ -30,6 +27,7 @@ func ConnectDB() *mongo.Client {
 var client *mongo.Client = ConnectDB()
 
 func GetCollection(collectioneName string) *mongo.Collection {
-	collection := client.Database("DB-test").Collection("collectioneName")
+	collection := client.Database("task-app").Collection(collectioneName)
+	fmt.Println("Connected to collection")
 	return collection
 }

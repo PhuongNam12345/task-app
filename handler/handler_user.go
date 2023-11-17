@@ -59,15 +59,16 @@ func EditUser() gin.HandlerFunc {
 		if err := c.BindJSON(&Newuser); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		}
-		update := bson.M{"fullname": Newuser.Fullname, "email": Newuser.Email, "phone": Newuser.Phone, "address": Newuser.Address, "role": Newuser.Role}
-		query, err := userCollection.UpdateOne(context.TODO(), bson.M{"userid": userId}, bson.M{"$set": update})
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-			return
-		}
-		if query.ModifiedCount > 0 {
-			c.JSON(http.StatusOK, gin.H{"Message": "Update access"})
-		}
+		model.QueryeEditUser(c, Newuser, userId)
+		// update := bson.M{"fullname": Newuser.Fullname, "email": Newuser.Email, "phone": Newuser.Phone, "address": Newuser.Address, "role": Newuser.Role}
+		// query, err := userCollection.UpdateOne(context.TODO(), bson.M{"userid": userId}, bson.M{"$set": update})
+		// if err != nil {
+		// 	c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		// 	return
+		// }
+		// if query.ModifiedCount > 0 {
+		// 	c.JSON(http.StatusOK, gin.H{"Message": "Update access"})
+		// }
 	}
 }
 func DeleteUser() gin.HandlerFunc {

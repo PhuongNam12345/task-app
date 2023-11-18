@@ -62,19 +62,19 @@ File manages install package automatic when go project
 
 File manages version package in app
 
-## workflow module task
+## Workflow module task
 
 ### create repository
 
 -   clone repository from repository to local code
 
-### dev code module task
+### Dev code module task
 
 -   create taget-branch is staging, then create new branch from staging branch
 -   a feature of app is code on new branch this with name branch feat/namefeat
 -   start code module task
 
-### commit branch
+### Commit code
 
 -   commit code on branch with commit message description
 -   push code to branch

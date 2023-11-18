@@ -89,3 +89,18 @@ File manages version package in app
 
 -   check pull request success
 -   merge pull request in main branch.
+
+## App-task Development environment
+
+### Development
+
+-   Branch `feat/staff` Code developing new feature for users of app
+-   Branch `feat/task` Code developing new feature for task of app
+
+### Staging
+
+-   Branch `staging` This environment test features or final versions before developing the main production environment.
+
+### Production environment
+
+-   Branch ` master` The main environment will application or feature will be deployed.

@@ -1,25 +1,37 @@
 package model
 
 import (
-	"App-Task/configsdb"
 	"context"
-	"net/http"
 
-	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-var userCollection *mongo.Collection = configsdb.GetCollection("users")
+func QueryCreate(collection *mongo.Collection, Newuser User) (User, error) {
+	_, err := collection.InsertOne(context.Background(), Newuser)
+	return Newuser, err
 
-func QueryeEditUser(c *gin.Context, Newuser User, userId string) {
-	update := bson.M{"fullname": Newuser.Fullname, "email": Newuser.Email, "phone": Newuser.Phone, "address": Newuser.Address, "role": Newuser.Role}
-	query, err := userCollection.UpdateOne(context.TODO(), bson.M{"userid": userId}, bson.M{"$set": update})
+}
+func QueryGetbyID(collection *mongo.Collection, id string) (User, error) {
+	var user User
+	filter := bson.M{"userid": id}
+	err := collection.FindOne(context.Background(), filter).Decode(&user)
+	return user, err
+}
+func QueryEdit(collection *mongo.Collection, id string, updateData bson.M) (*mongo.UpdateResult, error) {
+	filter := bson.M{"userid": id}
+	update := bson.M{"$set": updateData}
+	var query, err = collection.UpdateOne(context.TODO(), filter, update)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
+		return nil, err
 	}
-	if query.ModifiedCount > 0 {
-		c.JSON(http.StatusOK, gin.H{"Message": "Update access"})
+	return query, nil
+}
+func QueryDetele(collection *mongo.Collection, id string) (*mongo.DeleteResult, error) {
+	query, err := collection.DeleteOne(context.TODO(), bson.M{"userid": id})
+	if err != nil {
+		return nil, err
 	}
+	return query, nil
+
 }

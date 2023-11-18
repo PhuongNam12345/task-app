@@ -7,10 +7,9 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func QueryCreate(collection *mongo.Collection, Newuser User) (User, error) {
-	_, err := collection.InsertOne(context.Background(), Newuser)
-	return Newuser, err
-
+func QueryCreate(collection *mongo.Collection, Newuser User) (*mongo.InsertOneResult, error) {
+	result, err := collection.InsertOne(context.Background(), Newuser)
+	return result, err
 }
 func QueryGetbyID(collection *mongo.Collection, id string) (User, error) {
 	var user User
@@ -33,5 +32,4 @@ func QueryDetele(collection *mongo.Collection, id string) (*mongo.DeleteResult, 
 		return nil, err
 	}
 	return query, nil
-
 }

@@ -15,7 +15,6 @@ var userCollection *mongo.Collection = configsdb.GetCollection("users")
 func CreateUser() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var Newuser model.User
-
 		if err := c.BindJSON(&Newuser); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"errors": err.Error()})

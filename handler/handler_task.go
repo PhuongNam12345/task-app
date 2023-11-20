@@ -76,7 +76,7 @@ func EditTask() gin.HandlerFunc {
 func DeleteTask() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		taskId := c.Param("taskid")
-		_, err := taskCollection.DeleteOne(context.TODO(), bson.M{"taskid": taskId})
+		_, err := userCollection.DeleteMany(context.TODO(), bson.M{"userid": taskId})
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return

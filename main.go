@@ -11,7 +11,9 @@ func main() {
 	router := gin.Default()
 	//run database
 	configsdb.ConnectDB()
-	configsdb.GetCollection("users")
+	// configsdb.GetCollection("users")
+	// configsdb.GetCollection("tasks")
 	routes.UserRouter(router)
+	routes.TaskRouter(router)
 	router.Run("localhost:5000")
 }

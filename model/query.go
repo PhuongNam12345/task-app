@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package model
 
 import (
@@ -27,3 +28,5 @@ func QueryeEditUser(c *gin.Context, Newuser User, userId string) {
 		c.JSON(http.StatusOK, gin.H{"Message": "Update access"})
 	}
 }
+=======
+>>>>>>> 193079bbd72e0c4b497ab9161244f740d2acd6f2

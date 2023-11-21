@@ -61,3 +61,46 @@ File manages install package automatic when go project
 ### `go.sum`
 
 File manages version package in app
+
+## Workflow module task
+
+### create repository
+
+-   clone repository from repository to local code
+
+### Dev code module task
+
+-   create taget-branch is staging, then create new branch from staging branch
+-   a feature of app is code on new branch this with name branch feat/namefeat
+-   start code module task
+
+### Commit code
+
+-   commit code on branch with commit message description
+-   push code to branch
+
+### Pull request to target-branch
+
+-   push pull request branch to staging branch
+-   review code, check comment, discuss group, fix code, commit code
+-   (`edit and  commit on PR this `)
+
+### Merge pull request
+
+-   check pull request success
+-   merge pull request in main branch.
+
+## App-task Development environment
+
+### Development
+
+-   Branch `feat/staff` Code developing new feature for users of app
+-   Branch `feat/task` Code developing new feature for task of app
+
+### Staging
+
+-   Branch `staging` This environment test features or final versions before developing the main production environment.
+
+### Production environment
+
+-   Branch ` master` The main environment will application or feature will be deployed.

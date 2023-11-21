@@ -19,7 +19,10 @@ func QueryeEditUser(c *gin.Context, Newuser User, userId string) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 31be63cbb1e09fe917034d1d666f5c6462168e61
 	if query.ModifiedCount > 0 {
 		c.JSON(http.StatusOK, gin.H{"Message": "Update access"})
 	}

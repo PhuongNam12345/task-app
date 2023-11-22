@@ -7,7 +7,11 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func QueryCreate(collection *mongo.Collection, Newuser User) (*mongo.InsertOneResult, error) {
+func QueryCreateUser(collection *mongo.Collection, Newuser User) (*mongo.InsertOneResult, error) {
+	result, err := collection.InsertOne(context.Background(), Newuser)
+	return result, err
+}
+func QueryCreateTask(collection *mongo.Collection, Newuser Task) (*mongo.InsertOneResult, error) {
 	result, err := collection.InsertOne(context.Background(), Newuser)
 	return result, err
 }

@@ -4,7 +4,6 @@ package Handler
 import (
 	"App-Task/configsdb"
 	"App-Task/model"
-	"context"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -27,10 +26,9 @@ func CreateTask() gin.HandlerFunc {
 			return
 		}
 		id := Newtask.TaskID
-		var result bson.M
-		err := taskCollection.FindOne(context.TODO(), bson.M{"taskid": id}).Decode(&result)
+		_, err := model.QueryGetbyID(taskCollection, id)
 		if err != nil {
-			_, err := taskCollection.InsertOne(context.TODO(), Newtask)
+			_, err := model.QueryCreateTask(taskCollection, Newtask)
 			if err != nil {
 				c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 				return
@@ -46,7 +44,7 @@ func GetTask() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		taskId := c.Param("taskid")
 		var Newtask model.Task
-		err := taskCollection.FindOne(context.TODO(), bson.M{"taskid": taskId}).Decode(&Newtask)
+		_, err := model.QueryGetbyID(taskCollection, taskId)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
@@ -63,7 +61,7 @@ func EditTask() gin.HandlerFunc {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		}
 		update := bson.M{"taskname": Newtask.Taskname, "starting": Newtask.Starting, "deadline": Newtask.Deadline, "catelogy": Newtask.Catelogy, "userid": Newtask.UserID}
-		query, err := taskCollection.UpdateOne(context.TODO(), bson.M{"taskid": taskId}, bson.M{"$set": update})
+		query, err := model.QueryEdit(taskCollection, taskId, update)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
@@ -76,7 +74,7 @@ func EditTask() gin.HandlerFunc {
 func DeleteTask() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		taskId := c.Param("taskid")
-		_, err := userCollection.DeleteMany(context.TODO(), bson.M{"userid": taskId})
+		_, err := model.QueryDetele(taskCollection, taskId)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return

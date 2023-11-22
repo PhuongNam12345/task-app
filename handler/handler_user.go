@@ -23,7 +23,7 @@ func CreateUser() gin.HandlerFunc {
 		id := Newuser.UserID
 		_, err := model.QueryGetbyID(userCollection, id)
 		if err != nil {
-			_, err := model.QueryCreate(userCollection, Newuser)
+			_, err := model.QueryCreateUser(userCollection, Newuser)
 			if err != nil {
 				c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 				return
